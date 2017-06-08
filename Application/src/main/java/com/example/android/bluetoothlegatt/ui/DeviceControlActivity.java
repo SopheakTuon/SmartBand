@@ -152,7 +152,7 @@ public class DeviceControlActivity extends Activity {
                         if (data.get(1).intValue() == 10) {
                             displayByteDate(broadcastData);
                             if (data.get(2) > 0) {
-                                displayData(String.valueOf(data.get(2).intValue()));
+                                displayData("HR : " + String.valueOf(data.get(2).intValue()));
                                 stopMeasureHr();
                             }
                         }
@@ -166,7 +166,7 @@ public class DeviceControlActivity extends Activity {
                         if (data.get(1).intValue() == 18) {
                             displayByteDate(broadcastData);
                             if (data.get(2) > 0) {
-                                displayData(String.valueOf(data.get(2).intValue()) + "%");
+                                displayData("SPO2 : " + String.valueOf(data.get(2).intValue()) + "%");
                                 stopMeasureSPO2();
                             }
                         }
@@ -230,6 +230,7 @@ public class DeviceControlActivity extends Activity {
     private void clearUI() {
         mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
         mDataField.setText(R.string.no_data);
+        mByteData.setText(R.string.no_data);
     }
 
     @Override
