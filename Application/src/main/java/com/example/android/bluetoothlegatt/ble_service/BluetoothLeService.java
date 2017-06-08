@@ -75,7 +75,6 @@ public class BluetoothLeService extends Service {
     public final static String EXTRA_DATA =
             "com.example.bluetooth.le.EXTRA_DATA";
 
-    int mState = 0;
 
     //CLIENT_CHARACTERISTIC_CONFIG
     public static final UUID CCCD;
@@ -176,14 +175,6 @@ public class BluetoothLeService extends Service {
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 enableTXNotification();
                 broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);
-//                List<BluetoothGattService> bluetoothLeServices = mBluetoothGatt.getServices();
-//                List<BluetoothGattCharacteristic> bluetoothGattCharacteristics;
-//                for (BluetoothGattService bluetoothGattService : bluetoothLeServices) {
-//                    bluetoothGattCharacteristics = bluetoothGattService.getCharacteristics();
-//                    for (BluetoothGattCharacteristic bluetoothGattCharacteristic : bluetoothGattCharacteristics) {
-//                        mBluetoothGatt.readCharacteristic(bluetoothGattCharacteristic);
-//                    }
-//                }
                 List<BluetoothGattService> services = gatt.getServices();
                 Log.i("onServicesDiscovered", services.toString());
             } else {
@@ -205,60 +196,16 @@ public class BluetoothLeService extends Service {
                 broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
                 Log.d("onCharacteristicRead", stringBuilder.toString());
             }
-
-//            setNotifyNextSensor(gatt);
         }
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
-//            byte[] data = characteristic.getValue();
-//            StringBuilder stringBuilder = new StringBuilder(data.length);
-//            int length = data.length;
-//            for (int i = 0; i < length; i++) {
-//                stringBuilder.append(String.format("%02X ", new Object[]{Byte.valueOf(data[i])}));
-//            }
-//            String uuid = characteristic.getService().getUuid().toString();
-//            String characteristicUUID = characteristic.getUuid().toString();
-//            Log.d("onCharacteristicChanged", stringBuilder.toString());
-//            if (uuid.equals("0aabcdef-1111-2222-0000-facebeadaaaa") && characteristicUUID.equals("facebead-ffff-eeee-0004-facebeadaaaa")) {
-//                BluetoothLeService.this.broadcastUpdate(Constants.ACTION_MAIN_DATA_ECG_ALL_DATA, stringBuilder.toString());
-//            } else if (uuid.equals("0aabcdef-1111-2222-0000-facebeadaaaa") && characteristicUUID.equals("facebead-ffff-eeee-0005-facebeadaaaa")) {
-//                BluetoothLeService.this.broadcastUpdate(Constants.ACTION_MAIN_DATA_PW, stringBuilder.toString());
-//            } else if (uuid.equals("1aabcdef-1111-2222-0000-facebeadaaaa")) {
-//                BluetoothLeService.this.sendBindBroadcast(stringBuilder.toString());
-//            } else {
-////                broadcastUpdate(ACTION_DATA_AVAILABLE, stringBuilder.toString());
-//                BluetoothLeService.this.sendDataBroadcast(stringBuilder.toString());
-//            }
             BluetoothLeService.this.broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
-//            byte[] received = characteristic.getValue();
-//            Log.d("lq", "onCharacteristicChanged");
-//            String temp_text = "";
-//            for (int i = BluetoothLeService.FREE; i < received.length; i += BluetoothLeService.STATE_CONNECTING) {
-//                temp_text = temp_text + Integer.toHexString(received[i] & 255) + " ";
-//            }
-//            Log.d("onCharacteristicChanged", characteristic.getUuid().toString() + " : " + temp_text);
         }
 
         @Override
         public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
-//            readNextSensor(gatt);
-//            if (status == BluetoothGatt.GATT_SUCCESS) {
-////                broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
-//
-//
-//                final byte[] data = characteristic.getValue();
-//                if (data != null && data.length > 0) {
-//                    final StringBuilder stringBuilder = new StringBuilder(data.length);
-//                    for (byte byteChar : data)
-//                        stringBuilder.append(String.format("%02X ", byteChar));
-//
-//                    Log.d("onCharacteristicWrite", "" +  new String(data) + "\n" + stringBuilder.toString());
-//                }
-//
-//                mState++;
-//            }
         }
 
         @Override
@@ -405,140 +352,11 @@ public class BluetoothLeService extends Service {
     }
 
     /**
-     * @param data
-     */
-    private void sendBindBroadcast(String data) {
-        String cmdType = data.substring(9, 11);
-        if (cmdType.equals(Constants.CMD.DEVICE_MATCH_ACK)) {
-            Constants.isMatchInfo = true;
-            broadcastUpdate(Constants.ACTION_GATT_DEVICE_MATCH_ACK, Long.valueOf(data.substring(15, 17), 16));
-        } else if (cmdType.equals(Constants.CMD.DEVICE_UNBIND_ACK)) {
-            String values = data.substring(15, 17);
-            broadcastUpdate(Constants.ACTION_GATT_DEVICE_UNBIND_ACK, Long.valueOf(values, 16));
-        } else if (cmdType.equals(Constants.CMD.DEVICE_BIND_REQUEST)) {
-            broadcastUpdate(Constants.ACTION_GATT_DEVICE_BIND_REQUEST);
-        }
-    }
-
-    /**
-     * @param data
-     */
-    private void sendDataBroadcast(String data) {
-        Log.v(TAG, "Send Data = " + data);
-        if (!data.equals("CF")) {
-            String dataType = data.substring(9, 11);
-            Log.v(TAG, "Data CMD =========== " + dataType);
-            if (Constants.CMD.DATA_HEART_RATE.equals(dataType)) {
-                broadcastUpdate(Constants.ACTION_MAIN_DATA_HR, parseSingeData(data));
-                return;
-            }
-            if (Constants.CMD.DATA_MOOD.equals(dataType)) {
-                broadcastUpdate(Constants.ACTION_MAIN_DATA_MOOD, parseMoodIntData(data));
-                return;
-            }
-            if (Constants.CMD.DATA_FATIGUE.equals(dataType)) {
-                broadcastUpdate(Constants.ACTION_MAIN_DATA_FATIGUE, parseMoodIntData(data));
-                return;
-            }
-            if (Constants.CMD.DATA_BREATH_RATE.equals(dataType)) {
-                broadcastUpdate(Constants.ACTION_MAIN_DATA_BREATH, parseBRData(data));
-                return;
-            }
-            if (Constants.CMD.DATA_KLL.equals(dataType)) {
-                broadcastUpdate(Constants.ACTION_MAIN_DATA_KLL, parseSingeData(data));
-                return;
-            }
-            if (Constants.CMD.DATA_SLEEP.equals(dataType)) {
-                broadcastUpdate(Constants.ACTION_MAIN_DATA_SLEEP, parseSleepData(data));
-                return;
-            }
-            if (Constants.CMD.DATA_BLOOD_PRESSURE.equals(dataType)) {
-                Log.v(TAG, "bp = " + data);
-                broadcastUpdate(Constants.ACTION_MAIN_DATA_BP, parseBpData(data));
-                return;
-            }
-            if (Constants.CMD.DATA_ECG.equals(dataType)) {
-                broadcastUpdate(Constants.ACTION_MAIN_DATA_ECG, parseEcgData(data));
-                return;
-            }
-        }
-
-    }
-
-
-    /**
-     * @param data
-     * @return value of battery
-     */
-    private int pareseBatteryData(String data) {
-        return Integer.parseInt(data.substring(15, 17), 16);
-    }
-
-    /**
-     * @param data
-     * @return
-     */
-    private String parseSingeData(String data) {
-        String dataStr = data.substring(27, 38);
-        return new StringBuilder(String.valueOf((long) Integer.parseInt(dataStr.substring(9, 11) + dataStr.substring(6, 8) + dataStr.substring(3, 5) + dataStr.substring(0, 2), 16))).toString();
-    }
-
-    /**
-     * @param data
-     * @return
-     */
-    private long parseSleepData(String data) {
-        String dataStr = data.substring(27, 38);
-        String dateStr = data.substring(15, 26);
-        return (long) Integer.parseInt(dataStr.substring(9, 11) + dataStr.substring(6, 8) + dataStr.substring(3, 5) + dataStr.substring(0, 2), 16);
-    }
-
-    /**
-     * @param data
-     * @return
-     */
-    private String parseBpData(String data) {
-        Log.v(TAG, "bp data = " + data);
-        String dataStr = data.substring(27, 32);
-        Log.v(TAG, "bp dataStr = " + dataStr);
-        return dataStr;
-    }
-
-    /**
-     * @param data
-     * @return
-     */
-    private String parseEcgData(String data) {
-        Log.v(TAG, "Ecg data = " + data);
-        String dataStr = data.substring(27, 29);
-        Log.v(TAG, "Ecg dataStr = " + dataStr);
-        return dataStr;
-    }
-
-    /**
-     * @param data
-     * @return
-     */
-    private String parseBRData(String data) {
-        String dataStr = data.substring(27, 29);
-        Log.v(TAG, "BR DATA = " + dataStr);
-        return new StringBuilder(String.valueOf((long) Integer.parseInt(dataStr, 16))).toString();
-    }
-
-    /**
-     * @param data
-     * @return
-     */
-    private String parseMoodIntData(String data) {
-        return data.substring(27, 29);
-    }
-
-    /**
      * @param action
      * @param dataf
      */
     @Deprecated
-    private void broadcastUpdate(String action, long dataf) {
+    public void broadcastUpdate(String action, long dataf) {
         Intent intent = new Intent(action);
         intent.putExtra(action, dataf);
         sendBroadcast(intent);
@@ -547,7 +365,6 @@ public class BluetoothLeService extends Service {
     /**
      * @param action
      */
-    @Deprecated
     private void broadcastUpdate(final String action) {
         final Intent intent = new Intent(action);
         sendBroadcast(intent);

@@ -1,13 +1,5 @@
 [
     {
-        "merged": "D:\\PathMazingWorkspace\\AndroidSmartBand\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\ic_launcher.png",
-        "source": "D:\\PathMazingWorkspace\\AndroidSmartBand\\Application\\src\\main\\res\\drawable-xxhdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "D:\\PathMazingWorkspace\\Android-BLE-Wake-Up\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\ic_launcher.png",
-        "source": "D:\\PathMazingWorkspace\\Android-BLE-Wake-Up\\Application\\src\\main\\res\\drawable-xxhdpi\\ic_launcher.png"
-    },
-    {
         "merged": "D:\\PathMazingWorkspace\\SmartBand\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\ic_launcher.png",
         "source": "D:\\PathMazingWorkspace\\SmartBand\\Application\\src\\main\\res\\drawable-xxhdpi\\ic_launcher.png"
     }
