@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="D:\PathMazingWorkspace\AndroidSmartBand\Application\src\main\shaders"/></dataSet><dataSet config="debug"><source path="D:\PathMazingWorkspace\AndroidSmartBand\Application\src\debug\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="D:\PathMazingWorkspace\SmartBand\Application\src\main\shaders"/></dataSet><dataSet config="debug"><source path="D:\PathMazingWorkspace\SmartBand\Application\src\debug\shaders"/></dataSet></merger>

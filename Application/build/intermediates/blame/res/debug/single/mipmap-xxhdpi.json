@@ -1,5 +1,9 @@
 [
     {
+        "merged": "D:\\PathMazingWorkspace\\SmartBand\\Application\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher.png",
+        "source": "D:\\PathMazingWorkspace\\SmartBand\\Application\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
         "merged": "D:\\PathMazingWorkspace\\AndroidSmartBand\\Application\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher.png",
         "source": "D:\\PathMazingWorkspace\\AndroidSmartBand\\Application\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     },

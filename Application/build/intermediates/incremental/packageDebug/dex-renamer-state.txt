@@ -1,4 +1,4 @@
-#Thu Jun 08 13:13:40 ICT 2017
-base.0=D\:\\PathMazingWorkspace\\AndroidSmartBand\\Application\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
+#Thu Jun 08 13:28:26 ICT 2017
+base.0=D\:\\PathMazingWorkspace\\SmartBand\\Application\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
-file.0=D\:\\PathMazingWorkspace\\AndroidSmartBand\\Application\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
+file.0=D\:\\PathMazingWorkspace\\SmartBand\\Application\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
