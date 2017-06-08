@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "D:\\PathMazingWorkspace\\SmartBand\\Application\\build\\intermediates\\res\\merged\\release\\menu\\gatt_services.xml",
+        "source": "D:\\PathMazingWorkspace\\SmartBand\\Application\\src\\main\\res\\menu\\gatt_services.xml"
+    },
+    {
+        "merged": "D:\\PathMazingWorkspace\\SmartBand\\Application\\build\\intermediates\\res\\merged\\release\\menu\\main.xml",
+        "source": "D:\\PathMazingWorkspace\\SmartBand\\Application\\src\\main\\res\\menu\\main.xml"
+    }
+]
