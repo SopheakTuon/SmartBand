@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="command">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/smartbraceletlib/libs/command.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
