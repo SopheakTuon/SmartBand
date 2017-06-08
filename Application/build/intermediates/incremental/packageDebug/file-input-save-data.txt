@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Jun 08 14:07:48 ICT 2017
+#Thu Jun 08 14:30:33 ICT 2017
 14.set=ANDROID_RESOURCE
 180.file=D\:\\PathMazingWorkspace\\SmartBand\\Application\\build\\intermediates\\res\\resources-debug.ap_\\res\\layout\\select_dialog_item_material.xml
 118.set=ANDROID_RESOURCE

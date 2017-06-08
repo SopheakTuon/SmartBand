@@ -159,7 +159,7 @@ public class DeviceControlActivity extends Activity {
                         if (data.get(1).intValue() == 34) {
                             displayByteDate(broadcastData);
                             if (data.get(2) > 0) {
-                                displayData(String.valueOf(data.get(2).intValue()) + "/" + String.valueOf(data.get(3).intValue()) + " (mmhg)");
+                                displayData("BP High : " + String.valueOf(data.get(2).intValue()) + " (mmhg)" + "\nBP Low : " + String.valueOf(data.get(3).intValue()) + " (mmhg)");
                                 stopMeasureBP();
                             }
                         }
@@ -181,6 +181,7 @@ public class DeviceControlActivity extends Activity {
     private void displayByteDate(BroadcastData broadcastData) {
         mByteData.setText(bytesToByteString(broadcastData.getReceives()));
     }
+
     private void displayByteDate(String data) {
         mByteData.setText(data);
     }
